@@ -51,6 +51,11 @@ func closeLog(f *os.File) {
 
 func main() {
 
+	if err := InitGamepad(); err != nil {
+		fmt.Println("Gamepad init error:", err)
+	}
+	defer CloseGamepad()
+
 	exePath, err := os.Executable()
 	if err != nil {
 		fmt.Println("Error getting executable path:", err)

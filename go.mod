@@ -16,14 +16,14 @@ require (
 	github.com/sqweek/dialog v0.0.0-20220809060634-e981b270ebbf
 	github.com/yuin/gopher-lua v1.1.0
 	golang.org/x/mobile v0.0.0-20221110043201-43a038452099
+	golang.org/x/text v0.20.0
+	gopkg.in/ini.v1 v1.67.0
 )
 
 require (
 	github.com/icza/bitio v1.1.0 // indirect
 	github.com/mewkiz/flac v1.0.12 // indirect
 	github.com/mewkiz/pkg v0.0.0-20230226050401-4010bf0fec14 // indirect
-	golang.org/x/text v0.20.0 // indirect
-	gopkg.in/ini.v1 v1.67.0 // indirect
 )
 
 require (
@@ -33,11 +33,10 @@ require (
 	github.com/ebitengine/purego v0.7.1 // indirect
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0 // indirect
 	github.com/hajimehoshi/go-mp3 v0.3.4 // indirect
-	github.com/hajimehoshi/oto v0.7.1 // indirect
 	github.com/jfreymuth/oggvorbis v1.0.5 // indirect
 	github.com/jfreymuth/vorbis v1.0.2 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
-	github.com/mdouchement/hdr v0.2.4 // indirect
+	github.com/mdouchement/hdr v0.2.4
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/samhocevar/go-meltysynth v0.0.0-20230403180939-aca4a036cb16 // indirect
 	golang.org/x/image v0.22.0 // indirect
