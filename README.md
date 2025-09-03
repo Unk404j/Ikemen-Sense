@@ -12,7 +12,6 @@
 - 🕹️ Gamepad-ready menus and UI navigation
 - ✨ Modern and responsive UX (feedback, vibration, rumble...)
 - ⚙️ New gameplay modes and expanded features (coming soon)
-- 💻 Stable base for new games like **Crossworld**
 
 ---
 
@@ -36,77 +35,78 @@
 - 🧪 Planned UI elements for contextual button display
 
 
-## ✅ V0.99 - Prototype de Fork
+---
 
-- [x] Compilation Go opérationnelle via MSYS2
-- [x] Intégration de base SDL2
-- [x] Vibration testée avec `SDL_GameControllerRumble`
-- [x] Création d'un fork propre (`Ikemen Sens`)
-- [x] Structure du projet organisée (build, data, src...)
+## ✅ V0.99 - Fork Prototype
+
+- [x] Go compilation working via MSYS2
+- [x] Basic SDL2 integration
+- [x] Vibration tested with `SDL_GameControllerRumble`
+- [x] Clean fork created (`Ikemen Sens`)
+- [x] Project structure organized (build, data, src...)
 
 ---
 
 ## 🚀 V1.00 – 🎮 Modern Gamepad System
 
-Système de manettes moderne, auto-détection, UI et rumble.
+Modern gamepad system: detection, UI and rumble.
 
-- [ ] Détection du type de manette (Xbox / PlayStation / Autre)
-- [ ] Activation auto des vibrations (avec option ON/OFF plus tard)
-- [ ] Mapping dynamique des boutons (menus : A/X entrer, B/O retour)
-- [ ] Script Lua `rumble.lua` pour gestion contextuelle des vibrations
-- [ ] Affichage contextuel de l’interface (icônes Xbox / PS dans menus)
-- [ ] API d’entrée unifiée et stable
-
----
-
-## 🎨 V2.00 – UX / UI Design Moderne
-
-Interface utilisateur repensée dans l’esprit des jeux actuels.
-
-- [ ] Écran titre modernisé (illustration 2D dynamique / animé)
-- [ ] UI minimaliste et responsive
-- [ ] Thèmes clairs/sombres
-- [ ] Menus accessibles à la manette (navigation fluide)
-- [ ] Refonte visuelle des lifebars et écrans de victoire
-- [ ] Menus d’option lisibles et inspirés des Mortal Kombat récents
+- [ ] Detect controller type (Xbox / PlayStation / Other)
+- [ ] Auto-enable vibration (with ON/OFF toggle later)
+- [ ] Dynamic button mapping (menus: A/X enter, B/O back)
+- [ ] Lua script `rumble.lua` for contextual vibration logic
+- [ ] Contextual UI (Xbox / PS icons in menus)
+- [ ] Unified and stable input API
 
 ---
 
-## 🕹️ V3.00 – Modes de Jeu Riches
+## 🎨 V2.00 – UX / UI Modern Design
 
-Plus que l’arcade : du choix, de la variété, de la rejouabilité.
+Redesign UI and UX with modern 2D fighting game style.
 
-- [ ] Ajout d’un mode *Versus* (Joueur vs CPU)
-- [ ] Sélection de stage dynamique
-- [ ] Mode *Training* avancé
-- [ ] Ajout d’un hub/menu central type « lobby »
-- [ ] Base pour *Online play* futur
+- [ ] Modern title screen (animated 2D illustration)
+- [ ] Minimal and responsive UI
+- [ ] Light / Dark theme switcher
+- [ ] Gamepad navigation in menus
+- [ ] Lifebar and victory screen visual overhaul
+- [ ] Options menu inspired by recent Mortal Kombat games
 
 ---
 
-## ⚙️ V4.00 – Paramétrage Avancé / Accessibilité
+## 🕹️ V3.00 – Rich Game Modes
 
-Personnalisation, accessibilité et options modernes.
+More than arcade mode: variety and replay value.
 
-- [ ] Menu des options moderne et graphique
-- [ ] Remapping complet des touches (tous supports)
-- [ ] Activation/désactivation vibration
-- [ ] Mode daltonien / contraste
-- [ ] Mode sans échec au démarrage si crash (log + safe mode)
+- [ ] Add "Versus" mode (Player vs CPU)
+- [ ] Dynamic stage selection
+- [ ] Advanced training mode
+- [ ] Add main hub / lobby
+- [ ] Foundation for future Online play
+
+---
+
+## ⚙️ V4.00 – Advanced Settings / Accessibility
+
+Customization, comfort and accessibility.
+
+- [ ] Graphical settings menu
+- [ ] Full button remapping (all input types)
+- [ ] Vibration ON/OFF toggle
+- [ ] Colorblind / contrast mode
+- [ ] Crash recovery safe mode (logs, default settings)
 
 ---
 
 ## 🌐 V5.00 – Ready for the Future
 
-Ouverture, compatibilité, extensibilité.
+Portability, compatibility, openness.
 
-- [ ] Port Android
-- [ ] Port WebGL via Ebitengine
-- [ ] Enregistrement/replay de combats
-- [ ] Support cloud : profil, persos, saves
-- [ ] Intégration possible avec site web pour vote/persos populaires
+- [ ] Android port
+- [ ] WebGL port (via Ebitengine)
+- [ ] Fight replay & recording
+- [ ] Cloud sync (profile, characters, saves)
+- [ ] Web integration for voting / favorite characters
 
----
 
 ## 📦 Installation & Build
 
@@ -151,10 +151,12 @@ This project is licensed under the **MIT License** (see [License.txt](./License.
 
 Some screenpacks, fonts, or assets may fall under different licenses.  Certain non-code assets are licensed under CC-BY 3.0.
 
-> ⚠️ **Disclaimer**: I'm still learning and exploring programming. If some assets or attributions are incorrect or incomplete, I sincerely apologize and will correct them upon request or discovery.
+> ⚠️ **Disclaimer**: I'm still learning and exploring programming. If some assets or attributions are incorrect or incomplete, I sincerely apologize and will correct them upon request or discovery. 
 
 ---
 
 *Project initiated by [Unk404j](https://github.com/Unk404j), driven by curiosity, passion, and guided by AI.*
 
 See [License.txt](License.txt) for more details.
+
+This project is an experimental fork by a beginner in game development. If any license has been miscredited, please accept our apologies. We’re working to improve and learn with every step.
