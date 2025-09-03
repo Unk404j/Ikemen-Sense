@@ -130,7 +130,7 @@ For detailed instructions, check the [original engine wiki](https://github.com/i
 
 Ikemen Sense is designed as a **modern and modular base** for:
 
-- Custom fighting games like **Crossworld**
+- Custom fighting games
 - Modern reinterpretations of classic MUGEN
 - Game jams or rapid prototyping of 2D fighters
 - Educational projects using Lua and Go
