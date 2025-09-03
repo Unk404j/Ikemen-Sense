@@ -7,7 +7,7 @@ replace github.com/gopxl/beep/v2 => github.com/gopxl/beep/v2 v2.1.1-0.2024092113
 require (
 	github.com/flopp/go-findfont v0.1.0
 	github.com/go-gl/gl v0.0.0-20231021071112-07e5d0ea2e71
-	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20240506104042-037f3cc74f2a
+	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20250301202403-da16c1255728
 	github.com/go-gl/mathgl v1.0.0
 	github.com/gopxl/beep/v2 v2.1.1-0.20240921133731-defe79638e99
 	github.com/ikemen-engine/glfont v0.0.0-20241213091943-20149a0b660a

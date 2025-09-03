@@ -1,55 +1,91 @@
-# Ikemen GO
+# 🎮 Ikemen Sense
 
-Ikemen GO is an open source fighting game engine that supports resources from the [M.U.G.E.N](https://en.wikipedia.org/wiki/Mugen_(game_engine)) engine, written in Google’s programming language, [Go](https://go.dev/). It is a complete rewrite of a prior engine known simply as Ikemen.
+> A modern fork of the open-source fighting game engine **Ikemen GO**, reimagined with controller support, fresh UI/UX design, and an ambitious roadmap to become the ultimate evolution of MUGEN.
 
-## Features
-Ikemen GO aims for backwards-compatibility on par with M.U.G.E.N version 1.1 Beta, while simultaneously expanding on its features in a variety of ways.
+---
 
-Refer to [our wiki](https://github.com/ikemen-engine/Ikemen-GO/wiki) to see a comprehensive list of new features that have been added in Ikemen GO.
+## 📌 What is Ikemen Sense?
 
-## Installing
-Ready to use builds for Windows, macOS and Linux can be found in the [releases section](https://github.com/ikemen-engine/Ikemen-GO/releases) of this repository. You can find nightly builds [here](https://github.com/ikemen-engine/Ikemen-GO/releases/tag/nightly) as well, which update on every commit.
+**Ikemen Sense** is a modern fork of the Ikemen GO engine (a Go-based clone of M.U.G.E.N), with the goal of bringing this legendary 2D fighting engine to today's standards.
 
-## Running
-Download the ZIP archive that matches your operating system and extract its contents to your preferred location.
+- 🎮 Native controller support (Xbox & PlayStation)
+- 🕹️ Gamepad-ready menus and UI navigation
+- ✨ Modern and responsive UX (feedback, vibration, rumble...)
+- ⚙️ New gameplay modes and expanded features (coming soon)
+- 💻 Stable base for new games like **Crossworld**
 
-On Windows, double-click `Ikemen_GO.exe` (`Ikemen_GO_x86.exe` on 32-bit OSes).
-On macOS or Linux, double-click `Ikemen_GO.command`.
+---
 
-## Developing
-These instructions are for those interested in developing the Ikemen GO engine itself. Instructions for creating custom stages, fonts, characters and other resources can be found in the community forum.
+## 🗺️ Roadmap
 
-### Building
-You can find instructions for building Ikemen GO on our wiki. Instructions are available for [Windows](https://github.com/ikemen-engine/Ikemen-GO/wiki/Building,-Installing-and-Distributing#building-on-windows), [macOS](https://github.com/ikemen-engine/Ikemen-GO/wiki/Building,-Installing-and-Distributing#building-on-macos), and [Linux](https://github.com/ikemen-engine/Ikemen-GO/wiki/Building,-Installing-and-Distributing#building-on-linux).
+| Version | Goal | Status |
+|---------|------|--------|
+| `v1.00` | 🎮 Full modern gamepad support (SDL2, auto-detection, rumble) | ✅ IN PROGRESS |
+| `v2.00` | 🧑‍🎨 Modern UI/UX (menu, buttons, animations) | ⏳ Upcoming |
+| `v3.00` | 🎮 Rich game modes (VS CPU, tag, training, etc.) | ⏳ Upcoming |
+| `v4.00` | ⚙️ Settings & accessibility (keybinds, UI scaling, filters) | ⏳ Upcoming |
+| `v5.00` | 🚀 Future-ready (Android, online, mod/plugin support) | 🔮 Concept |
 
-### Debugging
-In order to run the compiled Ikemen GO executable, you will need to download the [engine dependencies](https://github.com/ikemen-engine/Ikemen_GO-Elecbyte-Screenpack) and unpack them into the Ikemen-GO source directory. After that, you can use [Goland](https://www.jetbrains.com/go/) or [Visual Studio Code](https://code.visualstudio.com/) to debug.
+---
 
-### Cross-compiling binaries with Docker (Linux/Windows/MacOS)
-The easiest way to compile binaries for other platforms is with Docker.
-You don't need the native development environment set to be able to build binaries if you decide to use Docker.  
-The image downloaded has all the required tools to compile Ikemen GO for all three major platforms.
+## ✅ Features Implemented
 
-Install [Docker for your platform](https://www.docker.com/get-started).  
-For macOS, you can install Docker using Homebrew (`brew cask install docker`).
+- ✅ SDL2 support with gamepad initialization
+- ✅ Detection of Xbox / PlayStation controllers
+- ✅ Rumble feedback via `SDL_GameControllerRumble`
+- ✅ Code structure ready for Xbox/PS UI assets
+- 🧪 Lua hook system for gameplay-triggered rumble (WIP)
+- 🧪 Planned UI elements for contextual button display
 
-Open a terminal, go to the Ikemen `build` directory folder and then run the script `build_docker.sh`. Look inside the script for details on how it works.
+---
 
-## Troubleshooting
-If you run into any issues with Ikemen Go, you can report it on our [issue tracker](https://github.com/ikemen-engine/Ikemen-GO/issues). It is recommend to read [this page](https://github.com/ikemen-engine/Ikemen-GO/blob/develop/CONTRIBUTING.md) before submitting a bug report.
+## 📦 Installation & Build
 
-## References
-- [The original reposity of Ikemen GO.](https://osdn.net/users/supersuehiro/pf/ikemen_go/) This project was forked from this repository due to its original author seemingly abandoning the project.
+> You’ll need Go, SDL2, and a MinGW/MSYS2 environment under Windows.
 
-- [The default motif bundled with the engine.](https://github.com/ikemen-engine/Ikemen_GO-Elecbyte-Screenpack) Note that this motif is licensed under CC-BY 3 rather than Ikemen GO's source, which is MIT.
+```bash
+# Clone the repo
+git clone https://github.com/YourGitHubUsername/Ikemen-Sense.git
+cd Ikemen-Sense
 
-## Name
-"Ikemen" is an acronym of:
+# Build
+cd src
+go build -o ../IkemenSense.exe
+```
 
-**い**つまでも **完**成しない **永**遠に **未**完成 **エン**ジン  
-**I**tsu made mo **K**ansei shinai **E**ien ni **M**ikansei **EN**gine
+For detailed instructions, check the [original engine wiki](https://github.com/ikemen-engine/Ikemen-GO/wiki).
 
-## License
-Ikemen GO's source code is available under the MIT License. Certain non-code assets are licensed under CC-BY 3.0.
+---
+
+## 💡 Use Cases
+
+Ikemen Sense is designed as a **modern and modular base** for:
+
+- Custom fighting games like **Crossworld**
+- Modern reinterpretations of classic MUGEN
+- Game jams or rapid prototyping of 2D fighters
+- Educational projects using Lua and Go
+
+---
+
+## 🔗 Useful Links
+
+- [Ikemen Engine (original repo)](https://github.com/ikemen-engine/Ikemen-GO)
+- [Ikemen Wiki & Docs](https://github.com/ikemen-engine/Ikemen-GO/wiki)
+- [License (MIT)](./License.txt)
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License** (see [License.txt](./License.txt)).
+
+Some screenpacks, fonts, or assets may fall under different licenses.  Certain non-code assets are licensed under CC-BY 3.0.
+
+> ⚠️ **Disclaimer**: I'm still learning and exploring programming. If some assets or attributions are incorrect or incomplete, I sincerely apologize and will correct them upon request or discovery.
+
+---
+
+*Project initiated by [Unk404j](https://github.com/Unk404j), driven by curiosity, passion, and guided by AI.*
 
 See [License.txt](License.txt) for more details.

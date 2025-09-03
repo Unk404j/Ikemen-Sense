@@ -3,7 +3,7 @@
 #===============================================================================
 [StateDef -4]
 
-ignoreHitPause if !const(Default.Enable.Score) || teamSide = 0 {
+if !const(Default.Enable.Score) || teamSide = 0 {
 	# do nothing, global code disabled locally or executed by stage
 } else if roundState = 0 {
 	map(_iksys_scoreTimeVitalFlag) := 0;
@@ -43,43 +43,44 @@ ignoreHitPause if !const(Default.Enable.Score) || teamSide = 0 {
 			map(_iksys_scoreTimeVitalFlag) := 1;
 		}
 	}
-} else if roundState >= 2 {
+} else ignoreHitPause if roundState >= 2 {
 	# score: first attack bonus
 	if !isHelper {
-		let ret = call IkSys_FirstAttack();
+		let ret = call FirstAttack();
 		if $ret {
 			scoreAdd{value: 1500}
 		}
 	}
 	# score: counter bonus
-	let ret = call IkSys_CounterHit();
+	let ret = call CounterHit();
 	if $ret {
 		scoreAdd{value: 100}
 	}
 	# score: damage bonus
-	let ret = call IkSys_ReceivedDamage();
+	let ret = call ReceivedDamage();
 	if $ret && getHitVar(score) = 0 {
 		let dmgMul = 0;
+		switch getHitVar(attr) {
 		# normal attacks
-		if getHitVar(attr) = SCA, HA {
+		case [const(AttrStandingHyperAttack), const(AttrAerialHyperAttack)]:
 			let dmgMul = 10;
-		} else if getHitVar(attr) = SCA, SA {
+		case [const(AttrStandingSpecialAttack), const(AttrAerialSpecialAttack)]:
 			let dmgMul = 9;
-		} else if getHitVar(attr) = SCA, NA {
+		case [const(AttrStandingNormalAttack), const(AttrAerialNormalAttack)]:
 			let dmgMul = 8;
 		# throws
-		} else if getHitVar(attr) = SCA, HT {
+		case [const(AttrStandingHyperThrow), const(AttrAerialHyperThrow)]:
 			let dmgMul = 10;
-		} else if getHitVar(attr) = SCA, ST {
+		case [const(AttrStandingSpecialThrow), const(AttrAerialSpecialThrow)]:
 			let dmgMul = 9;
-		} else if getHitVar(attr) = SCA, NT {
+		case [const(AttrStandingNormalThrow), const(AttrAerialNormalThrow)]:
 			let dmgMul = 8;
 		# projectiles
-		} else if getHitVar(attr) = SCA, HP {
+		case [const(AttrStandingHyperProjectile), const(AttrAerialHyperProjectile)]:
 			let dmgMul = 10;
-		} else if getHitVar(attr) = SCA, SP {
+		case [const(AttrStandingSpecialProjectile), const(AttrAerialSpecialProjectile)]:
 			let dmgMul = 9;
-		} else if getHitVar(attr) = SCA, NP {
+		case [const(AttrStandingNormalProjectile), const(AttrAerialNormalProjectile)]:
 			let dmgMul = 8;
 		}
 		if $dmgMul > 0 {
@@ -89,7 +90,7 @@ ignoreHitPause if !const(Default.Enable.Score) || teamSide = 0 {
 	# code executed only by P1 and P2
 	if playerNo = teamSide && !isHelper {
 		# score: combo count bonus
-		let ret = call IkSys_ComboCount();
+		let ret = call ComboCount();
 		if $ret {
 			switch $ret {
 			case 2:
@@ -123,22 +124,22 @@ ignoreHitPause if !const(Default.Enable.Score) || teamSide = 0 {
 			}
 		}
 		# score: win perfect bonus
-		let ret = call IkSys_WinPerfect();
+		let ret = call WinPerfect();
 		if $ret {
 			scoreAdd{value: 15000}
 		}
 		# score: win hyper bonus
-		let ret = call IkSys_WinHyper();
+		let ret = call WinHyper();
 		if $ret {
 			scoreAdd{value: 10000}
 		}
 		# score: win special bonus
-		let ret = call IkSys_WinSpecial();
+		let ret = call WinSpecial();
 		if $ret {
 			scoreAdd{value: 3000}
 		}
 		# score: win streak bonus
-		let ret = call IkSys_WinStreak();
+		let ret = call WinStreak();
 		if $ret {
 			scoreAdd{value: 30000 + ($ret - 1) * 10000}
 		}

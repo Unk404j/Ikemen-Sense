@@ -51,10 +51,14 @@ func closeLog(f *os.File) {
 
 func main() {
 
+	// Init Gamepad
 	if err := InitGamepad(); err != nil {
 		fmt.Println("Gamepad init error:", err)
+	} else {
+		fmt.Println("Gamepad OK - vibration de test")
+		Rumble(500) // Vibre 500ms si init réussi
+		defer CloseGamepad()
 	}
-	defer CloseGamepad()
 
 	exePath, err := os.Executable()
 	if err != nil {
