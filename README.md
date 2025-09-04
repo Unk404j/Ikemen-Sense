@@ -1,7 +1,8 @@
 # 🎮 Ikemen Sense
 
 > A modern fork of the open-source fighting game engine **Ikemen GO**, reimagined with controller support, fresh UI/UX design, and an ambitious roadmap to become the ultimate evolution of MUGEN.
-
+>Ikemen-Sense is not about ownership — it’s about pushing the engine forward.
+>If someone more experienced wants to take the lead on technical direction, I’d be more than happy to support that vision and contribute in other ways. 
 ---
 
 ## 📌 What is Ikemen Sense?
