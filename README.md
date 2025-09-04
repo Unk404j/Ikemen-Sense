@@ -126,6 +126,31 @@ For detailed instructions, check the [original engine wiki](https://github.com/i
 
 ---
 
+## 🎮 Gamepad Mapping
+
+Ikemen Sense uses SDL2's GameController API to auto-detect common layouts. Default mapping:
+
+| Engine Button | PlayStation | Xbox | Nintendo | Generic |
+|---------------|-------------|------|----------|---------|
+| **A** (confirm / light punch) | Cross (✕) | A | B | Button 1 (south) |
+| **B** (cancel / light kick) | Circle (○) | B | A | Button 2 (east) |
+| **C** | Square (□) | X | Y | Button 3 (west) |
+| **X** | Triangle (△) | Y | X | Button 4 (north) |
+| **Y** | L1 | LB | L | Button 5 (L1) |
+| **Z** | R1 | RB | R | Button 6 (R1) |
+| **Start** | Options | Start | + | Start |
+| **Back / Menu** | Share | Back | - | Select |
+| **L3** | Left stick press | Left stick press | Left stick press | Button 9 |
+| **R3** | Right stick press | Right stick press | Right stick press | Button 10 |
+| **D-Pad** | Directions | Directions | Directions | Directions |
+
+To customize button mapping, edit the `keyConfig` entries in the `save/config.json` file created after the first run. Each player slot maps direction and attack buttons (`kA`–`kZ`, `kS`, `kD`, `kW`, `kM`) to controller indices. See the [Ikemen GO wiki – Input Options](https://github.com/ikemen-engine/Ikemen-GO/wiki/Miscellaneous-Info#input-options) and Elecbyte's [M.U.G.E.N 1.1 docs](http://www.elecbyte.com/mugendocs-11b1/mugen.html) for more detail.
+
+**Limitations**
+
+- Requires SDL2 for controller initialization.
+- Gamepad support is currently implemented for Windows; other platforms fall back to a stub without SDL2 features.
+
 ## 💡 Use Cases
 
 Ikemen Sense is designed as a **modern and modular base** for:
