@@ -41,15 +41,15 @@ intro.storyboard =        ;Intro storyboard definition (optional)
 select = select.def       ;Character and stage selection list
 fight = fight.def         ;Fight definition filename
 ;System fonts
-font1 = f-4x6.def
-font2 = name14.def
-font3 = enter48.def
-font4 = arcade.def
-font5 = mssansserif-tt36.def
+font1 = font/Open_Sans/Open_Sans.def
+font2 = font/default-3x5.def
+font3 = font/default-3x5-bold.def
+font4 = font/debug.def
+font5 = font/Open_Sans/Open_Sans.def
 ;font5.height = 36         ;Uncomment to override the size of the font (Truetype fonts only)
-font6 = infofont.def
-font7 = Open_Sans.def
-font8 = num48.def
+font6 = font/default-3x5.def
+font7 = font/default-3x5-bold.def
+font8 = font/debug.def
 module =                  ;Ikemen feature: External Lua code
 
 ;----------------------------
