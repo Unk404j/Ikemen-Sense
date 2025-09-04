@@ -56,7 +56,6 @@ func main() {
 		fmt.Println("Gamepad init error:", err)
 	} else {
 		fmt.Println("Gamepad OK - vibration de test")
-		Rumble(500) // Vibre 500ms si init réussi
 		defer CloseGamepad()
 	}
 

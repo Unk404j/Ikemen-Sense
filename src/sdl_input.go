@@ -74,3 +74,8 @@ func CloseGamepad() {
 func Rumble(durationMs int) {
 	C.RumbleGamepad(0xFFFF, 0xFFFF, C.Uint32(durationMs))
 }
+
+// IsGamepadConnected returns true if an SDL game controller is open.
+func IsGamepadConnected() bool {
+	return C.IsGamepadConnected() != 0
+}

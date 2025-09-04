@@ -232,6 +232,21 @@ func systemScriptInit(l *lua.LState) {
 		}
 		return 0
 	})
+
+	// Lua: RumbleGamepad(ms)
+	// Ex: RumbleGamepad(300) → vibre 300ms
+	luaRegister(l, "RumbleGamepad", func(l *lua.LState) int {
+		ms := int(numArg(l, 1)) // utilitaires déjà présents: numArg/strArg/etc.
+		Rumble(ms)
+		return 0
+	})
+
+	// Lua: GamepadIsConnected() -> bool
+	luaRegister(l, "GamepadIsConnected", func(l *lua.LState) int {
+		l.Push(lua.LBool(IsGamepadConnected()))
+		return 1
+	})
+
 	luaRegister(l, "addHotkey", func(*lua.LState) int {
 		l.Push(lua.LBool(func() bool {
 			k := StringToKey(strArg(l, 1))
