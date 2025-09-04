@@ -12,7 +12,7 @@ local last = { up=false, down=false, left=false, right=false, ok=false, back=fal
 
 local function detect_and_rumble(section)
     -- Ensure Rumble is available
-    if not Rumble then return end
+    if not Rumble or not Rumble.available or not Rumble.available() then return end
 
     -- Cancel / Back
     if safe_call(esc) or main.f_input(main.t_players, {'m'}) then
