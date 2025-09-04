@@ -43,15 +43,33 @@
 
 ## 💻 Installation & Build
 
-> Requires Go, SDL2, and MinGW/MSYS2 under Windows.
+> Requires Go. SDL2 headers are included under `external/SDL2/include`.
+> Due to size and licensing reasons the Windows binaries (`SDL2.dll`, `SDL2.lib`)
+> are **not** stored in the repository. Download them from the
+> [official SDL2 releases](https://github.com/libsdl-org/SDL/releases) and place
+> them in `external/SDL2/lib/x64/`. Keep a copy of `SDL2.dll` next to the built
+> `IkemenSense.exe`.
 
 ```bash
 git clone https://github.com/YourGitHubUsername/Ikemen-Sense.git
 cd Ikemen-Sense/src
-go build -o ../IkemenSense.exe
+go build -tags=windows -o ../IkemenSense.exe
 ```
 
 For detailed steps, check the [original engine wiki](https://github.com/ikemen-engine/Ikemen-GO/wiki).
+
+### Windows Gamepad Rumble
+
+With the SDL2 binaries in place, controller vibration can be triggered with the
+following Lua snippet:
+
+```lua
+if Rumble.available() and Rumble.hasRumble() then
+    Rumble.vibrate(200)
+end
+```
+
+Optional presets are available via `pcall(require, 'rumble')`.
 
 ---
 

@@ -121,6 +121,11 @@ func main() {
 	sys.luaLState = sys.init(sys.gameWidth, sys.gameHeight)
 	defer sys.shutdown()
 
+	if err := InitGamepad(); err != nil {
+		fmt.Println("Gamepad init:", err)
+	}
+	defer CloseGamepad()
+
 	// Begin processing game using its lua scripts
 	if err := sys.luaLState.DoFile(sys.cfg.Config.System); err != nil {
 		// Display error logs.
