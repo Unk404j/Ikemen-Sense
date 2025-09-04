@@ -1,4 +1,5 @@
-//go:build windows
+//go:build windows && sdl
+// +build windows,sdl
 
 // sdl_input.go provides gamepad rumble support on Windows using SDL2.
 // It initializes the SDL game controller and haptic subsystems and exposes
@@ -8,9 +9,11 @@
 package main
 
 /*
-#cgo windows CFLAGS: -I${SRCDIR}/../external/SDL2/include
-#cgo windows LDFLAGS: -L${SRCDIR}/../external/SDL2/lib/x64 -lSDL2
-#include <SDL.h>
+#cgo windows CFLAGS: -I./external/SDL2/include
+#cgo windows LDFLAGS: -L./external/SDL2/lib/x64 -lSDL2
+#include "SDL.h"
+#include "SDL_haptic.h"
+#include "SDL_gamecontroller.h"
 #include <stdlib.h>
 */
 import "C"
@@ -48,15 +51,15 @@ func InitGamepad() error {
 	padLock.Lock()
 	defer padLock.Unlock()
 
+	if C.SDL_Init(C.SDL_INIT_GAMECONTROLLER|C.SDL_INIT_HAPTIC) != 0 {
+		return fmt.Errorf("SDL_Init: %s", C.GoString(C.SDL_GetError()))
+	}
+
 	// Force HIDAPI backends for broad device support.
 	setHint("SDL_JOYSTICK_HIDAPI", "1")
 	setHint("SDL_JOYSTICK_HIDAPI_PS4", "1")
 	setHint("SDL_JOYSTICK_HIDAPI_PS5", "1")
 	setHint("SDL_JOYSTICK_HIDAPI_XBOX", "1")
-
-	if C.SDL_Init(C.SDL_INIT_GAMECONTROLLER|C.SDL_INIT_HAPTIC) != 0 {
-		return fmt.Errorf("SDL_Init: %s", C.GoString(C.SDL_GetError()))
-	}
 
 	if C.SDL_NumJoysticks() < 1 {
 		// No controllers present. Not considered an error.
@@ -129,30 +132,37 @@ func ControllerName() string {
 	return C.GoString(C.SDL_GameControllerName(gc))
 }
 
-// Rumble activates the controller motors for the specified duration in
-// milliseconds. If rumble is unsupported or no controller is connected, the
-// call is ignored.
+// Rumble activates the controller motors with the given intensity for the
+// specified duration in milliseconds. If rumble is unsupported or no controller
+// is connected, the call is ignored.
 //
 // Parameters:
 //
-//	ms - duration of the vibration in milliseconds.
+//	intensity - strength in the range [0,1]
+//	ms        - duration of the vibration in milliseconds.
 //
 // Common issues: some third-party drivers (e.g., HidHide/DS4Windows) may
 // report controllers without rumble capability. In that case this function
 // silently does nothing.
-func Rumble(ms int) {
+func Rumble(intensity float64, ms int) {
 	padLock.Lock()
 	defer padLock.Unlock()
 	if gc == nil || !rumbleSupported {
 		return
 	}
+	if intensity < 0 {
+		intensity = 0
+	} else if intensity > 1 {
+		intensity = 1
+	}
 	duration := C.Uint32(ms)
+	level := C.Uint16(intensity * 0xffff)
 	// Try rumbling through the controller API first.
-	if C.SDL_GameControllerRumble(gc, 0x4000, 0x4000, duration) == 0 {
+	if C.SDL_GameControllerRumble(gc, level, level, duration) == 0 {
 		return
 	}
 	// If that fails, fall back to the generic haptic API.
 	if hap != nil {
-		C.SDL_HapticRumblePlay(hap, C.float(0.5), duration)
+		C.SDL_HapticRumblePlay(hap, C.float(intensity), duration)
 	}
 }

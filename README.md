@@ -52,8 +52,9 @@
 
 ```bash
 git clone https://github.com/YourGitHubUsername/Ikemen-Sense.git
-cd Ikemen-Sense/src
-go build -tags=windows -o ../IkemenSense.exe
+cd Ikemen-Sense
+set CGO_ENABLED=1
+go build -tags "windows sdl" -o IkemenSense.exe ./src
 ```
 
 For detailed steps, check the [original engine wiki](https://github.com/ikemen-engine/Ikemen-GO/wiki).
@@ -65,7 +66,7 @@ following Lua snippet:
 
 ```lua
 if Rumble.available() and Rumble.hasRumble() then
-    Rumble.vibrate(200)
+    Rumble.vibrate(0.5, 200)
 end
 ```
 

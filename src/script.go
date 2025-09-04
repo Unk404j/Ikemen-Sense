@@ -241,40 +241,7 @@ func toLValue(l *lua.LState, v interface{}) lua.LValue {
 func systemScriptInit(l *lua.LState) {
 	triggerFunctions(l)
 	deprecatedFunctions(l)
-	// Rumble table exposes basic controller vibration controls to Lua.
-	// Functions are safe to call even when no gamepad is connected.
-	rumble := l.NewTable()
-	l.SetGlobal("Rumble", rumble)
-
-	// Rumble.vibrate(ms)
-	// Triggers controller vibration for the given duration in milliseconds.
-	l.SetField(rumble, "vibrate", l.NewFunction(func(l *lua.LState) int {
-		if HasRumble() {
-			Rumble(int(numArg(l, 1)))
-		}
-		return 0
-	}))
-
-	// Rumble.available() -> bool
-	// Reports whether a controller is currently connected.
-	l.SetField(rumble, "available", l.NewFunction(func(l *lua.LState) int {
-		l.Push(lua.LBool(IsGamepadConnected()))
-		return 1
-	}))
-
-	// Rumble.hasRumble() -> bool
-	// Indicates if the connected controller supports vibration.
-	l.SetField(rumble, "hasRumble", l.NewFunction(func(l *lua.LState) int {
-		l.Push(lua.LBool(HasRumble()))
-		return 1
-	}))
-
-	// Rumble.controller_name() -> string
-	// Returns the controller name or an empty string.
-	l.SetField(rumble, "controller_name", l.NewFunction(func(l *lua.LState) int {
-		l.Push(lua.LString(ControllerName()))
-		return 1
-	}))
+	registerRumble(l)
 	// addChar(defs string)
 	// Adds one or more character definition paths to the select screen.
 	// Each line of the string parameter is treated as a separate .def file.
