@@ -30,6 +30,12 @@ const (
 	MaxPlayerNo     = MaxSimul*2 + MaxAttachedChar
 )
 
+const (
+	SDL_CONTROLLER_BUTTON_X             = 2
+	SDL_CONTROLLER_BUTTON_Y             = 3
+	SDL_CONTROLLER_BUTTON_RIGHTSHOULDER = 10
+)
+
 // sys
 // The only instance of a System struct.
 // Do not create more than 1.
@@ -347,6 +353,23 @@ func (s *System) init(w, h int32) *lua.LState {
 					}
 				}
 			}
+		}
+	}
+
+	for i := 0; i < len(sys.joystickConfig); i++ {
+		jc := &sys.joystickConfig[i]
+		name := ControllerName()
+		if name == "" {
+			name = input.GetJoystickName(jc.Joy)
+		}
+		if strings.Contains(name, "DualShock") ||
+			strings.Contains(name, "PS4") ||
+			strings.Contains(name, "PS5") ||
+			strings.Contains(name, "Wireless Controller") ||
+			strings.Contains(name, "DualSense") {
+			jc.kA = SDL_CONTROLLER_BUTTON_X
+			jc.kB = SDL_CONTROLLER_BUTTON_Y
+			jc.kC = SDL_CONTROLLER_BUTTON_RIGHTSHOULDER
 		}
 	}
 
