@@ -7,75 +7,102 @@ package main
 #cgo LDFLAGS: -lSDL2
 #include <SDL2/SDL.h>
 
-SDL_GameController* gController = NULL;
+static SDL_GameController* gController = NULL;
+static SDL_Haptic*        gHaptic    = NULL;
 
 int InitGamepad() {
-    if (SDL_Init(SDL_INIT_GAMECONTROLLER) < 0) {
-        return -1;
-    }
-    if (SDL_NumJoysticks() < 1) {
-        return -2;
-    }
+    SDL_SetHint(SDL_HINT_JOYSTICK_HIDAPI,            "1");
+    SDL_SetHint(SDL_HINT_JOYSTICK_HIDAPI_PS4,        "1");
+    SDL_SetHint(SDL_HINT_JOYSTICK_HIDAPI_PS4_RUMBLE, "1");
+    SDL_SetHint(SDL_HINT_JOYSTICK_HIDAPI_PS5,        "1");
+    SDL_SetHint(SDL_HINT_JOYSTICK_HIDAPI_PS5_RUMBLE, "1");
+    SDL_SetHint(SDL_HINT_JOYSTICK_HIDAPI_XBOX,       "1");
+
+    if (SDL_Init(SDL_INIT_GAMECONTROLLER | SDL_INIT_HAPTIC) < 0) return -1;
+    if (SDL_NumJoysticks() < 1)                              return -2;
+
     gController = SDL_GameControllerOpen(0);
-    if (gController == NULL) {
-        return -3;
-    }
-    return 0;
+    if (!gController) return -3;
+
+    if (SDL_GameControllerHasRumble(gController) == SDL_TRUE) return 0;
+
+    SDL_Joystick* js = SDL_GameControllerGetJoystick(gController);
+    if (!js) return -4;
+    gHaptic = SDL_HapticOpenFromJoystick(js);
+    if (!gHaptic) return -5;
+    if (SDL_HapticRumbleInit(gHaptic) != 0) return -6;
+    return 1; // using haptic fallback
 }
 
 void CloseGamepad() {
-    if (gController != NULL) {
-        SDL_GameControllerClose(gController);
-        gController = NULL;
-    }
-    SDL_QuitSubSystem(SDL_INIT_GAMECONTROLLER);
+    if (gHaptic)    { SDL_HapticClose(gHaptic); gHaptic = NULL; }
+    if (gController){ SDL_GameControllerClose(gController); gController = NULL; }
+    SDL_QuitSubSystem(SDL_INIT_HAPTIC | SDL_INIT_GAMECONTROLLER);
 }
 
-int IsGamepadConnected() {
-    return gController != NULL;
+int IsGamepadConnected() { return gController != NULL; }
+
+const char* ControllerName() {
+    if (!gController) return "";
+    const char* n = SDL_GameControllerName(gController);
+    return n ? n : "";
 }
 
-void RumbleGamepad(Uint16 lowFreq, Uint16 highFreq, Uint32 durationMs) {
-    if (gController != NULL) {
-        SDL_GameControllerRumble(gController, lowFreq, highFreq, durationMs);
+int HasRumble() {
+    if (gController && SDL_GameControllerHasRumble(gController) == SDL_TRUE) return 1;
+    if (gHaptic) return 1;
+    return 0;
+}
+
+void RumbleGamepad(Uint16 low, Uint16 high, Uint32 ms) {
+    if (gController && SDL_GameControllerHasRumble(gController) == SDL_TRUE) {
+        SDL_GameControllerRumble(gController, low, high, ms);
+    } else if (gHaptic) {
+        SDL_HapticRumblePlay(gHaptic, 1.0f, ms);
     }
 }
 */
 import "C"
 
-import (
-	"fmt"
-)
+import "fmt"
 
-// InitGamepad initializes the SDL2 game controller.
+// InitGamepad initializes SDL2 controller + haptic.
 func InitGamepad() error {
-	result := C.InitGamepad()
-	switch result {
+	switch r := C.InitGamepad(); r {
 	case 0:
-		fmt.Println("SDL2 Gamepad initialized.")
+		fmt.Println("SDL2 gamepad initialized (controller rumble).")
+		return nil
+	case 1:
+		fmt.Println("SDL2 gamepad initialized (haptic fallback).")
 		return nil
 	case -1:
-		return fmt.Errorf("SDL_Init(SDL_INIT_GAMECONTROLLER) failed")
+		return fmt.Errorf("SDL_Init failed")
 	case -2:
-		return fmt.Errorf("No joysticks detected")
+		return fmt.Errorf("no joysticks detected")
 	case -3:
-		return fmt.Errorf("Failed to open game controller")
+		return fmt.Errorf("failed to open game controller")
+	case -4:
+		return fmt.Errorf("failed to get joystick from controller")
+	case -5:
+		return fmt.Errorf("failed to open haptic from joystick")
+	case -6:
+		return fmt.Errorf("failed to init haptic rumble")
 	default:
-		return fmt.Errorf("Unknown error: %d", result)
+		return fmt.Errorf("unknown error %d", r)
 	}
 }
 
-// CloseGamepad properly closes the SDL2 game controller.
-func CloseGamepad() {
-	C.CloseGamepad()
-}
+// CloseGamepad shuts down controller/haptic subsystems.
+func CloseGamepad() { C.CloseGamepad() }
 
-// Rumble triggers a vibration (in milliseconds).
-func Rumble(durationMs int) {
-	C.RumbleGamepad(0xFFFF, 0xFFFF, C.Uint32(durationMs))
-}
+// Rumble triggers vibration (full strength, ms duration).
+func Rumble(ms int) { C.RumbleGamepad(0xFFFF, 0xFFFF, C.Uint32(ms)) }
 
-// IsGamepadConnected returns true if an SDL game controller is open.
-func IsGamepadConnected() bool {
-	return C.IsGamepadConnected() != 0
-}
+// IsGamepadConnected reports if a controller is opened.
+func IsGamepadConnected() bool { return C.IsGamepadConnected() != 0 }
+
+// HasRumble reports rumble capability.
+func HasRumble() bool { return C.HasRumble() != 0 }
+
+// ControllerName returns SDL name.
+func ControllerName() string { return C.GoString(C.ControllerName()) }

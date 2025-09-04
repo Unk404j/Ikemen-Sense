@@ -2382,6 +2382,10 @@ function main.f_menuWindow(t)
 end
 
 --Load additional scripts
+local okR, mod = pcall(require, 'external.script.rumble')
+if okR then Rumble = mod end
+pcall(require, 'external.script.rumble_menu_hook')
+pcall(require, 'external.script.rumble_fight_hook')
 start = require('external.script.start')
 randomtest = require('external.script.randomtest')
 options = require('external.script.options')

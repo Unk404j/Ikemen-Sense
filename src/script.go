@@ -247,6 +247,18 @@ func systemScriptInit(l *lua.LState) {
 		return 1
 	})
 
+	// Lua: GamepadHasRumble() -> bool
+	luaRegister(l, "GamepadHasRumble", func(l *lua.LState) int {
+		l.Push(lua.LBool(HasRumble()))
+		return 1
+	})
+
+	// Lua: GamepadControllerName() -> string
+	luaRegister(l, "GamepadControllerName", func(l *lua.LState) int {
+		l.Push(lua.LString(ControllerName()))
+		return 1
+	})
+
 	luaRegister(l, "addHotkey", func(*lua.LState) int {
 		l.Push(lua.LBool(func() bool {
 			k := StringToKey(strArg(l, 1))
@@ -1743,19 +1755,20 @@ func systemScriptInit(l *lua.LState) {
 				axes := input.GetJoystickAxes(joy)
 				btns := input.GetJoystickButtons(joy)
 
+				for i := range btns {
+					if btns[i] > 0 {
+						s = strconv.Itoa(i)
+						break
+					}
+				}
+				if s != "" {
+					break
+				}
 				s = CheckAxisForDpad(joy, &axes, len(btns))
 				if s != "" {
 					break
 				}
 				s = CheckAxisForTrigger(joy, &axes)
-				if s != "" {
-					break
-				}
-				for i := range btns {
-					if btns[i] > 0 {
-						s = strconv.Itoa(i)
-					}
-				}
 				if s != "" {
 					break
 				}
