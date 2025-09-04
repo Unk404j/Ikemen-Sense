@@ -1,187 +1,118 @@
 # 🎮 Ikemen Sense
 
-> A modern fork of the open-source fighting game engine **Ikemen GO**, reimagined with controller support, fresh UI/UX design, and an ambitious roadmap to become the ultimate evolution of MUGEN.
+> **Ikemen-Sense is not about ownership — it’s about pushing the engine forward.**  
+> If someone more experienced wants to take the lead on technical direction, I’d be more than happy to support that vision and contribute in other ways.  
+>  
+> **The dream:** make Ikemen-Sense the ultimate open-source fighting game engine of the next decade — modern, extensible, and community-driven.
 
 ---
 
 ## 📌 What is Ikemen Sense?
 
-**Ikemen Sense** is a modern fork of the Ikemen GO engine (a Go-based clone of M.U.G.E.N), with the goal of bringing this legendary 2D fighting engine to today's standards.
+**Ikemen Sense** is a modern fork of **Ikemen GO** (a Go-based clone of M.U.G.E.N), aiming to bring this legendary 2D fighting engine to today's standards.
 
-- 🎮 Native controller support (Xbox & PlayStation)
-- 🕹️ Gamepad-ready menus and UI navigation
-- ✨ Modern and responsive UX (feedback, vibration, rumble...)
-- ⚙️ New gameplay modes and expanded features (coming soon)
+- 🎮 **Native controller support** (Xbox & PlayStation)
+- 🕹️ **Gamepad-ready menus** and UI navigation
+- ✨ **Modern UX** (feedback, vibration, rumble…)
+- ⚙️ **New gameplay modes** and expanded features (coming soon)
 
 ---
 
-# 🧭 Ikemen Sens - Roadmap & Todo
+## 🧽 Roadmap
 
 | Version | Goal | Status |
-|---------|------|--------|
-| `v1.00` | 🎮 Full modern gamepad support (SDL2, auto-detection, rumble) | ✅ IN PROGRESS |
-| `v2.00` | 🧑‍🎨 Modern UI/UX (menu, buttons, animations) | ⏳ Upcoming |
-| `v3.00` | 🎮 Rich game modes (VS CPU, tag, training, etc.) | ⏳ Upcoming |
-| `v4.00` | ⚙️ Settings & accessibility (keybinds, UI scaling, filters) | ⏳ Upcoming |
-| `v5.00` | 🚀 Future-ready (Android, online, mod/plugin support) | 🔮 Concept |
-
-## ✅ Features Implemented
-
-- ✅ SDL2 support with gamepad initialization
-- ✅ Detection of Xbox / PlayStation controllers
-- ✅ Rumble feedback via `SDL_GameControllerRumble`
-- ✅ Code structure ready for Xbox/PS UI assets
-- 🧪 Lua hook system for gameplay-triggered rumble (WIP)
-- 🧪 Planned UI elements for contextual button display
-
+|--------|------|--------|
+| **v1.00** | 🎮 Modern gamepad system (SDL2, rumble) | ✅ In progress |
+| **v2.00** | 🧑‍🎨 Modern UI/UX (menus, animations) | ⏳ Upcoming |
+| **v3.00** | 🎮 Rich game modes (VS CPU, tag, training) | ⏳ Upcoming |
+| **v4.00** | ⚙️ Accessibility (keybinds, UI scaling, filters) | ⏳ Upcoming |
+| **v5.00** | 🚀 Future-ready (Android, online, mod/plugin) | 🔮 Concept |
 
 ---
 
-## ✅ V0.99 - Fork Prototype
+## ✅ Current Features
 
-- [x] Go compilation working via MSYS2
-- [x] Basic SDL2 integration
-- [x] Vibration tested with `SDL_GameControllerRumble`
-- [x] Clean fork created (`Ikemen Sens`)
-- [x] Project structure organized (build, data, src...)
-
----
-
-## 🚀 V1.00 – 🎮 Modern Gamepad System
-
-Modern gamepad system: detection, UI and rumble.
-
-- [ ] Detect controller type (Xbox / PlayStation / Other)
-- [ ] Auto-enable vibration (with ON/OFF toggle later)
-- [ ] Dynamic button mapping (menus: A/X enter, B/O back)
-- [ ] Lua script `rumble.lua` for contextual vibration logic
-- [ ] Contextual UI (Xbox / PS icons in menus)
-- [ ] Unified and stable input API
+- ✅ SDL2 support & controller detection  
+- ✅ Xbox / PlayStation gamepad compatibility  
+- ✅ Rumble feedback via `SDL_GameControllerRumble`  
+- ✅ Project structure reorganized for modularity  
+- 🧲 Lua hook system for gameplay-triggered rumble (WIP)  
+- 🧲 Contextual UI elements (Xbox/PS icons in menus – planned)
 
 ---
 
-## 🎨 V2.00 – UX / UI Modern Design
+## 💻 Installation & Build
 
-Redesign UI and UX with modern 2D fighting game style.
-
-- [ ] Modern title screen (animated 2D illustration)
-- [ ] Minimal and responsive UI
-- [ ] Light / Dark theme switcher
-- [ ] Gamepad navigation in menus
-- [ ] Lifebar and victory screen visual overhaul
-- [ ] Options menu inspired by recent Mortal Kombat games
-
----
-
-## 🕹️ V3.00 – Rich Game Modes
-
-More than arcade mode: variety and replay value.
-
-- [ ] Add "Versus" mode (Player vs CPU)
-- [ ] Dynamic stage selection
-- [ ] Advanced training mode
-- [ ] Add main hub / lobby
-- [ ] Foundation for future Online play
-
----
-
-## ⚙️ V4.00 – Advanced Settings / Accessibility
-
-Customization, comfort and accessibility.
-
-- [ ] Graphical settings menu
-- [ ] Full button remapping (all input types)
-- [ ] Vibration ON/OFF toggle
-- [ ] Colorblind / contrast mode
-- [ ] Crash recovery safe mode (logs, default settings)
-
----
-
-## 🌐 V5.00 – Ready for the Future
-
-Portability, compatibility, openness.
-
-- [ ] Android port
-- [ ] WebGL port (via Ebitengine)
-- [ ] Fight replay & recording
-- [ ] Cloud sync (profile, characters, saves)
-- [ ] Web integration for voting / favorite characters
-
-
-## 📦 Installation & Build
-
-> You’ll need Go, SDL2, and a MinGW/MSYS2 environment under Windows.
+> Requires Go, SDL2, and MinGW/MSYS2 under Windows.
 
 ```bash
-# Clone the repo
 git clone https://github.com/YourGitHubUsername/Ikemen-Sense.git
-cd Ikemen-Sense
-
-# Build
-cd src
+cd Ikemen-Sense/src
 go build -o ../IkemenSense.exe
 ```
 
-For detailed instructions, check the [original engine wiki](https://github.com/ikemen-engine/Ikemen-GO/wiki).
+For detailed steps, check the [original engine wiki](https://github.com/ikemen-engine/Ikemen-GO/wiki).
 
 ---
-
-## 🎮 Gamepad Mapping
-
-Ikemen Sense uses SDL2's GameController API to auto-detect common layouts. Default mapping:
-
-| Engine Button | PlayStation | Xbox | Nintendo | Generic |
-|---------------|-------------|------|----------|---------|
-| **A** (confirm / light punch) | Cross (✕) | A | B | Button 1 (south) |
-| **B** (cancel / light kick) | Circle (○) | B | A | Button 2 (east) |
-| **C** | Square (□) | X | Y | Button 3 (west) |
-| **X** | Triangle (△) | Y | X | Button 4 (north) |
-| **Y** | L1 | LB | L | Button 5 (L1) |
-| **Z** | R1 | RB | R | Button 6 (R1) |
-| **Start** | Options | Start | + | Start |
-| **Back / Menu** | Share | Back | - | Select |
-| **L3** | Left stick press | Left stick press | Left stick press | Button 9 |
-| **R3** | Right stick press | Right stick press | Right stick press | Button 10 |
-| **D-Pad** | Directions | Directions | Directions | Directions |
-
-To customize button mapping, edit the `keyConfig` entries in the `save/config.json` file created after the first run. Each player slot maps direction and attack buttons (`kA`–`kZ`, `kS`, `kD`, `kW`, `kM`) to controller indices. See the [Ikemen GO wiki – Input Options](https://github.com/ikemen-engine/Ikemen-GO/wiki/Miscellaneous-Info#input-options) and Elecbyte's [M.U.G.E.N 1.1 docs](http://www.elecbyte.com/mugendocs-11b1/mugen.html) for more detail.
-
-**Limitations**
-
-- Requires SDL2 for controller initialization.
-- Gamepad support is currently implemented for Windows; other platforms fall back to a stub without SDL2 features.
 
 ## 💡 Use Cases
 
-Ikemen Sense is designed as a **modern and modular base** for:
+Ikemen Sense is a **modern and modular base** for:
 
-- Custom fighting games
-- Modern reinterpretations of classic MUGEN
-- Game jams or rapid prototyping of 2D fighters
-- Educational projects using Lua and Go
+* Custom fighting games
+* Modern reinterpretations of classic M.U.G.E.N
+* Game jams & rapid prototyping
+* Educational projects using Lua and Go
 
 ---
 
-## 🔗 Useful Links
+## 🌟 Long-Term Vision
 
-- [Ikemen Engine (original repo)](https://github.com/ikemen-engine/Ikemen-GO)
-- [Ikemen Wiki & Docs](https://github.com/ikemen-engine/Ikemen-GO/wiki)
-- [License (MIT)](./License.txt)
+The goal is to turn **Ikemen-Sense** into **the ultimate open-source fighting game engine of the next decade** — a platform that is:
+
+* 💻 **Modern & Extensible** – ready for HD assets, cross-platform builds, and plugins
+* 🕹️ **Player-Friendly** – smooth controller support, accessibility options, online play
+* 🧑‍💻 **Dev-Friendly** – clean architecture, full documentation, easy onboarding
+* 🎮 **Community-Driven** – powered by contributors, modders, and fighting game fans
+
+Ikemen-Sense is not just a fork — it’s a step towards a future where creating a professional-quality 2D fighting game is **as accessible as making a mod**, and where the community drives innovation together.
+
+---
+
+## 🤖 AI-Assisted Development
+
+Ikemen-Sense is partly developed with **AI-assisted coding** (OpenAI Codex / ChatGPT).
+AI tools helped prototype features, refactor code, and draft documentation — but every feature is tested, reviewed, and guided by a clear human vision.
+
+As a fun nod to this collaboration, there are plans to add **GPT.exe**, an AI-inspired playable character, as a reference to the project's AI-driven origins.
+
+---
+
+## 🤝 Contributing & Credits
+
+This project is **community-focused**:
+
+* Contributions are welcome — bug fixes, features, documentation, and refactors.
+* If a more experienced developer wants to take technical leadership, I will gladly support and contribute in other ways.
+* Feedback, issues, and suggestions are encouraged to help shape the future of Ikemen-Sense.
+
+**Credits:**
+
+* The [Ikemen GO contributors](https://github.com/ikemen-engine/Ikemen-GO)
+* The M.U.G.E.N community
+* Everyone helping to build this fork and push it forward
 
 ---
 
 ## 📜 License
 
-This project is licensed under the **MIT License** (see [License.txt](./License.txt)).
+This project is under the **MIT License** (see [License.txt](./License.txt)).
+Some screenpacks, fonts, or assets may fall under other licenses (e.g., CC-BY 3.0).
 
-Some screenpacks, fonts, or assets may fall under different licenses.  Certain non-code assets are licensed under CC-BY 3.0.
-
-> ⚠️ **Disclaimer**: I'm still learning and exploring programming. If some assets or attributions are incorrect or incomplete, I sincerely apologize and will correct them upon request or discovery. 
+> ⚠️ **Disclaimer:** I’m still learning programming and open-source collaboration.
+> If some assets or attributions are incorrect, I sincerely apologize and will fix them as soon as they are reported.
 
 ---
 
 *Project initiated by [Unk404j](https://github.com/Unk404j), driven by curiosity, passion, and guided by AI.*
 
-See [License.txt](License.txt) for more details.
-
-This project is an experimental fork by a beginner in game development. If any license has been miscredited, please accept our apologies. We’re working to improve and learn with every step.
