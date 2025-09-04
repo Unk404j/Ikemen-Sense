@@ -25,7 +25,10 @@ extern void key_up_callback(int key);
 extern void char_callback(unsigned ch);
 #endif
 */
-import "C"
+import (
+	"C"
+	"os"
+)
 
 const (
 	MAX_JOYSTICK_COUNT = 8
@@ -271,4 +274,12 @@ func (input *Input) GetJoystickButtons(joy int) []int32 {
 		return input.joysticks[joy].buttons[:]
 	}
 	return []int32{}
+}
+
+// LoadGamepadMappings loads controller mappings from file (stub for Kinc backend).
+func LoadGamepadMappings(path string) error {
+	if _, err := os.ReadFile(path); err != nil {
+		return err
+	}
+	return nil
 }

@@ -283,6 +283,11 @@ func loadConfig(def string) (*Config, error) {
 	c.IniFile = iniFile
 	c.normalize()
 	c.sysSet()
+	if c.Config.GamepadMappings != "" {
+		if err := LoadGamepadMappings(c.Config.GamepadMappings); err != nil {
+			fmt.Printf("Warning: failed to load gamepad mappings: %v\n", err)
+		}
+	}
 	c.Save(def)
 	return &c, nil
 }

@@ -41,15 +41,15 @@ intro.storyboard =        ;Intro storyboard definition (optional)
 select = select.def       ;Character and stage selection list
 fight = fight.def         ;Fight definition filename
 ;System fonts
-font1 = f-4x6.def
-font2 = name14.def
-font3 = enter48.def
-font4 = arcade.def
-font5 = mssansserif-tt36.def
+font1 = default-3x5.def
+font2 = default-3x5.def
+font3 = default-3x5.def
+font4 = default-3x5.def
+font5 = default-3x5-bold.def
 ;font5.height = 36         ;Uncomment to override the size of the font (Truetype fonts only)
-font6 = infofont.def
-font7 = Open_Sans.def
-font8 = num48.def
+font6 = default-3x5.def
+font7 = default-3x5.def
+font8 = default-3x5-bold.def
 module =                  ;Ikemen feature: External Lua code
 
 ;----------------------------
@@ -1629,134 +1629,351 @@ winstext.layerno = 2
 
 ;-------------------------------------------------------------------
 ;Options screen definition
-[Option Info]
-fadein.time = 10
-fadein.col = 0, 0, 0                               ;Ikemen feature
-;fadein.anim =                                     ;Ikemen feature
-fadeout.time = 10
-fadeout.col = 0, 0, 0                              ;Ikemen feature
-;fadeout.anim =                                    ;Ikemen feature
-title.offset = 640,38
-title.font = 4,0,0
-title.scale = 1.0, 1.0
-title.text = "OPTIONS"                             ;Ikemen feature
-menu.uselocalcoord = 1                             ;Ikemen feature
-menu.pos = 414, 99                                 ;Ikemen feature
-menu.item.offset = 0, 0                            ;Ikemen feature
-menu.item.font = 7,0,1, 191,191,191                ;Ikemen feature
-menu.item.scale = 1.0, 1.0                         ;Ikemen feature
-menu.item.active.offset = 0, 0                     ;Ikemen feature
-menu.item.active.font = 7,0,1                      ;Ikemen feature
-menu.item.active.scale = 1.0, 1.0                  ;Ikemen feature
-menu.item.selected.offset = 0, 0                   ;Ikemen feature
-menu.item.selected.font = 7,0,1, 0,247,247         ;Ikemen feature
-menu.item.selected.scale = 1.0, 1.0                ;Ikemen feature
-menu.item.selected.active.offset = 0, 0            ;Ikemen feature
-menu.item.selected.active.font = 7,0,1, 0,247,247  ;Ikemen feature
-menu.item.selected.active.scale = 1.0, 1.0         ;Ikemen feature
-menu.item.value.offset = 450, 0                    ;Ikemen feature
-menu.item.value.font = 7,0,-1, 191,191,191         ;Ikemen feature
-menu.item.value.scale = 1.0, 1.0                   ;Ikemen feature
-menu.item.value.active.offset = 450, 0             ;Ikemen feature
-menu.item.value.active.font = 7,0,-1               ;Ikemen feature
-menu.item.value.active.scale = 1.0, 1.0            ;Ikemen feature
-menu.item.value.conflict.offset = 450, 0           ;Ikemen feature
-menu.item.value.conflict.font = 7,0,-1, 247,0,0    ;Ikemen feature
-menu.item.value.conflict.scale = 1.0, 1.0          ;Ikemen feature
-menu.item.info.offset = 450, 0                     ;Ikemen feature
-menu.item.info.font = 7,0,-1, 247,247,0            ;Ikemen feature
-menu.item.info.scale = 1.0, 1.0                    ;Ikemen feature
-menu.item.info.active.offset = 450, 0              ;Ikemen feature
-menu.item.info.active.font = 7,0,-1, 247,247,0     ;Ikemen feature
-menu.item.info.active.scale = 1.0, 1.0             ;Ikemen feature
-menu.item.spacing = 0, 42                          ;Ikemen feature
-;menu.window.margins.y = 0, 0                       ;Ikemen feature
-menu.window.visibleitems = 13                      ;Ikemen feature
-menu.boxcursor.visible = 1                         ;Ikemen feature
-menu.boxcursor.coords = -15, -30, 462, 11          ;Ikemen feature
-menu.boxcursor.col = 255, 255, 255                 ;Ikemen feature
-menu.boxcursor.alpharange = 10, 40, 2, 255, 255, 0 ;Ikemen feature
-menu.boxbg.visible = 1                             ;Ikemen feature
-menu.boxbg.col = 0, 0, 0                           ;Ikemen feature
-menu.boxbg.alpha = 0, 128                          ;Ikemen feature
-;menu.arrow.up.anim =                              ;Ikemen feature
-menu.arrow.up.spr = 400, 0                         ;Ikemen feature
-menu.arrow.up.offset = 428, -51                    ;Ikemen feature
-menu.arrow.up.facing = 1                           ;Ikemen feature
-menu.arrow.up.scale = 1.0, 1.0                     ;Ikemen feature
-;menu.arrow.down.anim =                            ;Ikemen feature
-menu.arrow.down.spr = 401, 0                       ;Ikemen feature
-menu.arrow.down.offset = 428, 525                  ;Ikemen feature
-menu.arrow.down.facing = 1                         ;Ikemen feature
-menu.arrow.down.scale = 1.0, 1.0                   ;Ikemen feature
-menu.title.uppercase = 1                           ;Ikemen feature
-menu.valuename.none = "None"                       ;Ikemen feature
-menu.valuename.random = "Random"                   ;Ikemen feature
-menu.valuename.default = "Default"                 ;Ikemen feature
-menu.valuename.f = "(F%i)"                         ;Ikemen feature
-menu.valuename.esc = "(Esc)"                       ;Ikemen feature
-menu.valuename.page = "(Tab)"                      ;Ikemen feature
-menu.valuename.nokey = "Not used"                  ;Ikemen feature
-menu.valuename.yes = "Yes"                         ;Ikemen feature
-menu.valuename.no = "No"                           ;Ikemen feature
-menu.valuename.enabled = "Enabled"                 ;Ikemen feature
-menu.valuename.disabled = "Disabled"               ;Ikemen feature
-keymenu.p1.pos = 276, 99                           ;Ikemen feature
-keymenu.p2.pos = 693, 99                           ;Ikemen feature
-keymenu.item.p1.offset = 156, 0                    ;Ikemen feature
-keymenu.item.p1.font = 7,0,0, 0,247,247            ;Ikemen feature
-keymenu.item.p1.scale = 1.0, 1.0                   ;Ikemen feature
-keymenu.item.p2.offset = 156, 0                    ;Ikemen feature
-keymenu.item.p2.font = 7,0,0, 247,0,0              ;Ikemen feature
-keymenu.item.p2.scale = 1.0, 1.0                   ;Ikemen feature
+[Option Info] ;Ikemen feature
+	fadein.time = 10
+	fadeout.time = 10
 
-; unassigned 'keymenu.item' parameters use corresponding 'menu.item' values
-keymenu.item.spacing = 0, 36                       ;Ikemen feature
-keymenu.item.value.offset = 303, 0                 ;Ikemen feature
-keymenu.item.value.active.offset = 303, 0          ;Ikemen feature
-keymenu.item.value.conflict.offset = 303, 0        ;Ikemen feature
-keymenu.item.info.offset = 303, 0                  ;Ikemen feature
-keymenu.item.info.active.offset = 303, 0           ;Ikemen feature
+	title.offset = 159, 19
+	title.font = "font/default-3x5.def", 0, 0, 255, 255, 255, -1
+	title.scale = 1.0, 1.0
+	title.xshear = 0.0
+	title.angle = 0.0
 
-keymenu.boxcursor.coords = -15, -27, 318, 8        ;Ikemen feature
-keymenu.itemname.playerno = "PLAYER %i"            ;Ikemen feature
-keymenu.itemname.configall = "Config all"          ;Ikemen feature
-keymenu.itemname.up = "Up"                         ;Ikemen feature
-keymenu.itemname.down = "Down"                     ;Ikemen feature
-keymenu.itemname.left = "Left"                     ;Ikemen feature
-keymenu.itemname.right = "Right"                   ;Ikemen feature
-keymenu.itemname.a = "A"                           ;Ikemen feature
-keymenu.itemname.b = "B"                           ;Ikemen feature
-keymenu.itemname.c = "C"                           ;Ikemen feature
-keymenu.itemname.x = "X"                           ;Ikemen feature
-keymenu.itemname.y = "Y"                           ;Ikemen feature
-keymenu.itemname.z = "Z"                           ;Ikemen feature
-keymenu.itemname.start = "Start"                   ;Ikemen feature
-keymenu.itemname.d = "D"                           ;Ikemen feature
-keymenu.itemname.w = "W"                           ;Ikemen feature
-keymenu.itemname.menu = "Menu"                     ;Ikemen feature
-keymenu.itemname.back = "Back"                     ;Ikemen feature
-keymenu.itemname.page = "Page"                     ;Ikemen feature
+	cursor.move.snd = 100, 0
+	cursor.done.snd = 100, 1
+	cancel.snd = 100, 2
 
-textinput.offset = 75, 96                          ;Ikemen feature
-textinput.font = 7,0,1                             ;Ikemen feature
-textinput.scale = 1.0, 1.0                         ;Ikemen feature
-textinput.port.text = "Type in Host Port, e.g. 7500.\nPress ENTER to accept.\nPress ESC to cancel." ;Ikemen feature
-textinput.reswidth.text = "Type in screen width.\nPress ENTER to accept.\nPress ESC to cancel."     ;Ikemen feature
-textinput.resheight.text = "Type in screen height.\nPress ENTER to accept.\nPress ESC to cancel."   ;Ikemen feature
-;textinput.overlay.window = 0, 0, 1280, 720         ;Ikemen feature
-textinput.overlay.col = 0, 0, 0                    ;Ikemen feature
-textinput.overlay.alpha = 0, 128                   ;Ikemen feature
+	; Ikemen features
+	; --------------------------------------------------------------------------
+	fadein.col = 0, 0, 0
+	fadein.anim = -1
+	fadeout.col = 0, 0, 0
+	fadeout.anim = -1
 
-cursor.move.snd = 100, 0
-cursor.done.snd = 100, 1
-cancel.snd = 100, 2
+	title.text = "OPTIONS"
 
-; If custom menus are not declared, default option screen layout is loaded.
-; Refer to system.base.def for an example how to modify option screen menus.
+	; Refer to Notes at the beginning of this file.
+	menu.uselocalcoord = 0
 
-;-------------------
-;Options screen background
+	; Refer to [Title Info] menu parameters for extra comments explaining how to
+	; define menus (unlike Mugen, where option screen look is hardcoded, Ikemen
+	; follows vanilla Mugen convention from Title Screen for building menus)
+
+	menu.pos = 85, 33
+
+	;menu.bg.<itemname>.anim = -1
+	;menu.bg.<itemname>.spr = 
+	;menu.bg.<itemname>.offset = 0, 0
+	;menu.bg.<itemname>.facing = 1
+	;menu.bg.<itemname>.scale = 1.0, 1.0
+	;menu.bg.active.<itemname>.anim = -1
+	;menu.bg.active.<itemname>.spr = 
+	;menu.bg.active.<itemname>.offset = 0, 0
+	;menu.bg.active.<itemname>.facing = 1
+	;menu.bg.active.<itemname>.scale = 1.0, 1.0
+	
+	menu.item.bg.anim = -1
+	menu.item.bg.spr = 
+	menu.item.bg.scale = 1.0, 1.0
+	menu.item.bg.offset = 0.0, 0.0
+	menu.item.bg.facing = 1
+	menu.item.active.bg.anim = -1
+	menu.item.active.bg.spr = 
+	menu.item.active.bg.scale = 1.0, 1.0
+	menu.item.active.bg.offset = 0.0, 0.0
+	menu.item.active.bg.facing = 1
+
+	menu.item.offset = 0, 0
+	menu.item.font = "font/default-3x5.def", 0, 1, 191, 191, 191, -1
+	menu.item.scale = 1.0, 1.0
+	menu.item.xshear = 0.0
+	menu.item.angle = 0.0
+
+	menu.item.active.offset = 0, 0
+	menu.item.active.font = "font/default-3x5.def", 0, 1, 255, 255, 255, -1
+	menu.item.active.scale = 1.0, 1.0
+	menu.item.active.xshear = 0.0
+	menu.item.active.angle = 0.0
+
+	menu.item.selected.offset = 0, 0
+	menu.item.selected.font = "font/default-3x5.def", 0, 1, 0, 247, 247, -1
+	menu.item.selected.scale = 1.0, 1.0
+	menu.item.selected.xshear = 0.0
+	menu.item.selected.angle = 0.0
+	menu.item.selected.active.offset = 0, 0
+	menu.item.selected.active.font = "font/default-3x5.def", 0, 1, 0, 247, 247, -1
+	menu.item.selected.active.scale = 1.0, 1.0
+	menu.item.selected.active.xshear = 0.0
+	menu.item.selected.active.angle = 0.0
+
+	menu.item.value.offset = 150, 0
+	menu.item.value.font = "font/default-3x5.def", 0, -1, 191, 191, 191, -1
+	menu.item.value.scale = 1.0, 1.0
+	menu.item.value.xshear = 0.0
+	menu.item.value.angle = 0.0
+
+	menu.item.value.active.offset = 150, 0
+	menu.item.value.active.font = "font/default-3x5.def", 0, -1, 255, 255, 255, -1
+	menu.item.value.active.scale = 1.0, 1.0
+	menu.item.value.active.xshear = 0.0
+	menu.item.value.active.angle = 0.0
+
+	menu.item.value.conflict.offset = 150, 0
+	menu.item.value.conflict.font = "font/default-3x5.def", 0, -1, 247, 0, 0, -1
+	menu.item.value.conflict.scale = 1.0, 1.0
+	menu.item.value.conflict.xshear = 0.0
+	menu.item.value.conflict.angle = 0.0
+
+	menu.item.info.offset = 150, 0
+	menu.item.info.font = "font/default-3x5.def", 0, -1, 247, 247, 0, -1
+	menu.item.info.scale = 1.0, 1.0
+	menu.item.info.xshear = 0.0
+	menu.item.info.angle = 0.0
+	menu.item.info.active.offset = 150, 0
+	menu.item.info.active.font = "font/default-3x5.def", 0, -1, 247, 247, 0, -1
+	menu.item.info.active.scale = 1.0, 1.0
+	menu.item.info.active.xshear = 0.0
+	menu.item.info.active.angle = 0.0
+
+	menu.item.spacing = 0, 14
+	menu.window.margins.y = 0, 0
+	menu.window.visibleitems = 13
+
+	menu.boxcursor.visible = 1
+	menu.boxcursor.coords = -5, -10, 154, 3
+	menu.boxcursor.col = 255, 255, 255
+	menu.boxcursor.alpharange = 10, 40, 2, 255, 255, 0
+	menu.boxbg.visible = 1
+	menu.boxbg.col = 0, 0, 0
+	menu.boxbg.alpha = 0, 128
+
+	menu.arrow.up.anim = -1
+	menu.arrow.up.spr = 
+	menu.arrow.up.offset = 0, 0
+	menu.arrow.up.facing = 1
+	menu.arrow.up.scale = 1.0, 1.0
+	menu.arrow.down.anim = -1
+	menu.arrow.down.spr = 
+	menu.arrow.down.offset = 0, 0
+	menu.arrow.down.facing = 1
+	menu.arrow.down.scale = 1.0, 1.0
+
+	menu.title.uppercase = 1
+	menu.valuename.none = "None"
+	menu.valuename.random = "Random"
+	menu.valuename.default = "Default"
+	menu.valuename.f = "(F%i)"
+	menu.valuename.esc = "(Esc)"
+	menu.valuename.page = "(Tab)"
+	menu.valuename.nokey = "Not used"
+	menu.valuename.yes = "Yes"
+	menu.valuename.no = "No"
+	menu.valuename.enabled = "Enabled"
+	menu.valuename.disabled = "Disabled"
+	menu.valuename.normal = "Normal"
+	menu.valuename.slow = "Slow %i"
+	menu.valuename.fast = "Fast %i"
+
+	keymenu.p1.pos = 39, 33
+	keymenu.p2.pos = 178, 33
+
+	;keymenu.bg.<itemname>.anim = -1
+	;keymenu.bg.<itemname>.spr = 
+	;keymenu.bg.<itemname>.offset = 0, 0
+	;keymenu.bg.<itemname>.facing = 1
+	;keymenu.bg.<itemname>.scale = 1.0, 1.0
+	;keymenu.bg.active.<itemname>.anim = -1
+	;keymenu.bg.active.<itemname>.spr = 
+	;keymenu.bg.active.<itemname>.offset = 0, 0
+	;keymenu.bg.active.<itemname>.facing = 1
+	;keymenu.bg.active.<itemname>.scale = 1.0, 1.0
+
+	keymenu.item.p1.offset = 52, 0
+	keymenu.item.p1.font = "font/default-3x5.def", 0, 0, 0, 247, 247, -1
+	keymenu.item.p1.scale = 1.0, 1.0
+	keymenu.item.p1.xshear = 0.0
+	keymenu.item.p1.angle = 0.0
+	keymenu.item.p2.offset = 52, 0
+	keymenu.item.p2.font = "font/default-3x5.def", 0, 0, 247, 0, 0, -1
+	keymenu.item.p2.scale = 1.0, 1.0
+	keymenu.item.p2.xshear = 0.0
+	keymenu.item.p2.angle = 0.0
+
+	; Unassigned keymenu.item parameters use corresponding menu.item values.
+	keymenu.item.spacing = 0, 12
+	keymenu.item.value.offset = 101, 0
+	keymenu.item.value.active.offset = 101, 0
+	keymenu.item.value.conflict.offset = 101, 0
+	keymenu.item.info.offset = 101, 0
+	keymenu.item.info.active.offset = 101, 0
+	keymenu.boxcursor.coords = -5, -9, 106, 2
+	keymenu.itemname.playerno = "PLAYER %i"
+	keymenu.itemname.configall = "Config all"
+	keymenu.itemname.up = "Up"
+	keymenu.itemname.down = "Down"
+	keymenu.itemname.left = "Left"
+	keymenu.itemname.right = "Right"
+	keymenu.itemname.a = "A"
+	keymenu.itemname.b = "B"
+	keymenu.itemname.c = "C"
+	keymenu.itemname.x = "X"
+	keymenu.itemname.y = "Y"
+	keymenu.itemname.z = "Z"
+	keymenu.itemname.start = "Start"
+	keymenu.itemname.d = "D"
+	keymenu.itemname.w = "W"
+	keymenu.itemname.menu = "Menu"
+	keymenu.itemname.back = "Back"
+	keymenu.itemname.page = "Page"
+
+	textinput.offset = 25, 32
+	textinput.font = "font/default-3x5.def", 0, 1, 191, 191, 191, -1
+	textinput.scale = 1.0, 1.0
+	textinput.xshear = 0.0
+	textinput.angle = 0.0
+	textinput.port.text = "Type in Host Port, e.g. 7500.\nPress ENTER to accept.\nPress ESC to cancel."
+	textinput.reswidth.text = "Type in screen width.\nPress ENTER to accept.\nPress ESC to cancel."
+	textinput.resheight.text = "Type in screen height.\nPress ENTER to accept.\nPress ESC to cancel."
+	;textinput.overlay.window = 0, 0, localcoordX, localcoordY
+	textinput.overlay.col = 0, 0, 0
+	textinput.overlay.alpha = 0, 128
+
+	; https://github.com/ikemen-engine/Ikemen-GO/wiki/Screenpack-features#submenus
+	; If custom menu is not declared, following menu is loaded by default:
+	menu.itemname.menugame = "Paramètres jeu"
+	menu.itemname.menugame.language = "Langue"
+	menu.itemname.menugame.difficulty = "Difficulté"
+	menu.itemname.menugame.roundtime = "Limite de temps"
+	menu.itemname.menugame.lifemul = "Vie"
+	menu.itemname.menugame.singlevsteamlife = "Single VS Team Life"
+	menu.itemname.menugame.gamespeed = "Game Speed"
+	menu.itemname.menugame.roundsnumsingle = "Rounds to Win (Single)"
+	menu.itemname.menugame.maxdrawgames = "Max Draw Games"
+	menu.itemname.menugame.credits = "Credits"
+	menu.itemname.menugame.aipalette = "Arcade Palette"
+	menu.itemname.menugame.aisurvivalpalette = "Survival Palette"
+	menu.itemname.menugame.airamping = "AI Ramping"
+	menu.itemname.menugame.quickcontinue = "Quick Continue"
+	menu.itemname.menugame.autoguard = "Auto-Guard"
+	menu.itemname.menugame.dizzy = "Dizzy"
+	menu.itemname.menugame.guardbreak = "Guard Break"
+	menu.itemname.menugame.redlife = "Red Life"
+	menu.itemname.menugame.teamduplicates = "Team Duplicates"
+	menu.itemname.menugame.teamlifeshare = "Team Life Share"
+	menu.itemname.menugame.teampowershare = "Team Power Share"
+	menu.itemname.menugame.empty = ""
+	menu.itemname.menugame.menutag = "Tag Settings"
+	menu.itemname.menugame.menutag.roundsnumtag = "Rounds to Win (Tag)"
+	menu.itemname.menugame.menutag.losekotag = "Partner KOed Lose"
+	menu.itemname.menugame.menutag.empty = ""
+	menu.itemname.menugame.menutag.mintag = "Min Tag Chars"
+	menu.itemname.menugame.menutag.maxtag = "Max Tag Chars"
+	menu.itemname.menugame.menutag.empty = ""
+	menu.itemname.menugame.menutag.back = "Back"
+	menu.itemname.menugame.menusimul = "Simul Settings"
+	menu.itemname.menugame.menusimul.roundsnumsimul = "Rounds to Win (Simul)"
+	menu.itemname.menugame.menusimul.losekosimul = "Player KOed Lose"
+	menu.itemname.menugame.menusimul.empty = ""
+	menu.itemname.menugame.menusimul.minsimul = "Min Simul Chars"
+	menu.itemname.menugame.menusimul.maxsimul = "Max Simul Chars"
+	menu.itemname.menugame.menusimul.empty = ""
+	menu.itemname.menugame.menusimul.back = "Back"
+	menu.itemname.menugame.menuturns = "Turns Settings"
+	menu.itemname.menugame.menuturns.turnsrecoverybase = "Turns Recovery Base"
+	menu.itemname.menugame.menuturns.turnsrecoverybonus = "Turns Recovery Bonus"
+	menu.itemname.menugame.menuturns.empty = ""
+	menu.itemname.menugame.menuturns.minturns = "Min Turns Chars"
+	menu.itemname.menugame.menuturns.maxturns = "Max Turns Chars"
+	menu.itemname.menugame.menuturns.empty = ""
+	menu.itemname.menugame.menuturns.back = "Back"
+	menu.itemname.menugame.menuratio = "Ratio Settings"
+	menu.itemname.menugame.menuratio.ratiorecoverybase = "Ratio Recovery Base"
+	menu.itemname.menugame.menuratio.ratiorecoverybonus = "Ratio Recovery Bonus"
+	menu.itemname.menugame.menuratio.empty = ""
+	menu.itemname.menugame.menuratio.ratio1life = "Ratio 1 Life"
+	menu.itemname.menugame.menuratio.ratio1attack = "Ratio 1 Damage"
+	menu.itemname.menugame.menuratio.ratio2life = "Ratio 2 Life"
+	menu.itemname.menugame.menuratio.ratio2attack = "Ratio 2 Damage"
+	menu.itemname.menugame.menuratio.ratio3life = "Ratio 3 Life"
+	menu.itemname.menugame.menuratio.ratio3attack = "Ratio 3 Damage"
+	menu.itemname.menugame.menuratio.ratio4life = "Ratio 4 Life"
+	menu.itemname.menugame.menuratio.ratio4attack = "Ratio 4 Damage"
+	menu.itemname.menugame.menuratio.empty = ""
+	menu.itemname.menugame.menuratio.back = "Back"
+	menu.itemname.menugame.back = "Back"
+
+	menu.itemname.menuvideo = "Paramètres vidéo"
+	menu.itemname.menuvideo.renderer = "Rendu"
+	menu.itemname.menuvideo.renderer.gl32 = "OpenGL 3.2"
+	menu.itemname.menuvideo.renderer.gl21 = "OpenGL 2.1"
+	menu.itemname.menuvideo.renderer.empty = ""
+	menu.itemname.menuvideo.renderer.back = "Back"
+	menu.itemname.menuvideo.resolution = "Résolution" ;reserved submenu
+	; Resolution is assigned based on values used in itemname suffix (e.g. 320x240)
+	menu.itemname.menuvideo.resolution.320x240 = "320x240    (4:3 QVGA)"
+	menu.itemname.menuvideo.resolution.640x480 = "640x480    (4:3 VGA)"
+	menu.itemname.menuvideo.resolution.960x720 = "960x720    (4:3 HD)"
+	menu.itemname.menuvideo.resolution.1280x720 = "1280x720   (16:9 HD)"
+	menu.itemname.menuvideo.resolution.1600x900 = "1600x900   (16:9 HD+)"
+	menu.itemname.menuvideo.resolution.1920x1080 = "1920x1080  (16:9 FHD)"
+	menu.itemname.menuvideo.resolution.empty = ""
+	menu.itemname.menuvideo.resolution.customres = "Custom"
+	menu.itemname.menuvideo.resolution.back = "Back"
+	menu.itemname.menuvideo.fullscreen = "Plein écran"
+	menu.itemname.menuvideo.keepaspect = "Conserver ratio"
+	menu.itemname.menuvideo.windowscalemode = "Bilinear Filtering"
+	menu.itemname.menuvideo.vsync = "VSync"
+	menu.itemname.menuvideo.msaa = "MSAA"
+	menu.itemname.menuvideo.shaders = "Shaders" ;reserved submenu
+	; This list is populated with shaders existing in 'external/shaders' directory
+	menu.itemname.menuvideo.shaders.empty = ""
+	menu.itemname.menuvideo.shaders.noshader = "Disable"
+	menu.itemname.menuvideo.shaders.back = "Back"
+	menu.itemname.menuvideo.model = "3D Model Settings"
+	menu.itemname.menuvideo.model.enablemodel = "3D Model"
+	menu.itemname.menuvideo.model.enablemodelshadow = "Shadow"
+	menu.itemname.menuvideo.model.empty = ""
+	menu.itemname.menuvideo.model.back = "Back"
+	menu.itemname.menuvideo.empty = ""
+	menu.itemname.menuvideo.back = "Retour"
+
+	menu.itemname.menuaudio = "Paramètres audio"
+	menu.itemname.menuaudio.mastervolume = "Volume principal"
+	menu.itemname.menuaudio.bgmvolume = "Volume BGM"
+	menu.itemname.menuaudio.sfxvolume = "Volume SFX"
+	menu.itemname.menuaudio.audioducking = "Audio Ducking"
+	menu.itemname.menuaudio.stereoeffects = "Stereo Effects"
+	menu.itemname.menuaudio.panningrange = "Panning Range"
+	menu.itemname.menuaudio.empty = ""
+	menu.itemname.menuaudio.back = "Retour"
+
+	menu.itemname.menuinput = "Paramètres manette"
+	menu.itemname.menuinput.keyboard = "Config Clavier"
+	menu.itemname.menuinput.gamepad = "Config Manette"
+
+	menu.itemname.menuinput.empty = ""
+	menu.itemname.menuinput.inputdefault = "Par défaut"
+	menu.itemname.menuinput.back = "Retour"
+
+	menu.itemname.menuengine = "Paramètres moteur"
+	menu.itemname.menuengine.players = "Joueurs"
+	menu.itemname.menuengine.debugkeys = "Touches debug"
+	menu.itemname.menuengine.debugmode = "Mode debug"
+	menu.itemname.menuengine.empty = ""
+	menu.itemname.menuengine.helpermax = "HelperMax"
+	menu.itemname.menuengine.projectilemax = "PlayerProjectileMax"
+	menu.itemname.menuengine.explodmax = "ExplodMax"
+	menu.itemname.menuengine.afterimagemax = "AfterImageMax"
+	menu.itemname.menuengine.empty = ""
+	menu.itemname.menuengine.back = "Back"
+
+	menu.itemname.empty = ""
+	menu.itemname.portchange = "Changer port"
+	menu.itemname.default = "Valeurs par défaut"
+	menu.itemname.empty = ""
+	menu.itemname.savereturn = "Sauver et revenir"
+	menu.itemname.return = "Retour sans sauvegarde"
+
 [OptionBGdef]
 
 [OptionBG 1]

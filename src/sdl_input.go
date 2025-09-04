@@ -6,6 +6,7 @@ package main
 /*
 #cgo LDFLAGS: -lSDL2
 #include <SDL2/SDL.h>
+#include <stdlib.h>
 
 static SDL_GameController* gController = NULL;
 static SDL_Haptic*        gHaptic    = NULL;
@@ -61,10 +62,17 @@ void RumbleGamepad(Uint16 low, Uint16 high, Uint32 ms) {
         SDL_HapticRumblePlay(gHaptic, 1.0f, ms);
     }
 }
+
+int AddMappings(const char* file) {
+    return SDL_GameControllerAddMappingsFromFile(file);
+}
 */
 import "C"
 
-import "fmt"
+import (
+	"fmt"
+	"unsafe"
+)
 
 // InitGamepad initializes SDL2 controller + haptic.
 func InitGamepad() error {
@@ -106,3 +114,13 @@ func HasRumble() bool { return C.HasRumble() != 0 }
 
 // ControllerName returns SDL name.
 func ControllerName() string { return C.GoString(C.ControllerName()) }
+
+// AddSDLGamepadMappingsFromFile loads SDL controller mappings from file.
+func AddSDLGamepadMappingsFromFile(path string) error {
+	cpath := C.CString(path)
+	defer C.free(unsafe.Pointer(cpath))
+	if C.AddMappings(cpath) < 0 {
+		return fmt.Errorf("failed to load SDL gamepad mappings")
+	}
+	return nil
+}

@@ -5,6 +5,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"os"
 	"runtime"
 	"strconv"
 	"strings"
@@ -18,6 +19,21 @@ type Input struct {
 
 type Key = glfw.Key
 type ModifierKey = glfw.ModifierKey
+
+// LoadGamepadMappings loads controller mappings from file.
+func LoadGamepadMappings(path string) error {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return err
+	}
+	if err := glfw.UpdateGamepadMappings(string(data)); err != nil {
+		return err
+	}
+	if err := AddSDLGamepadMappingsFromFile(path); err != nil {
+		return err
+	}
+	return nil
+}
 
 const (
 	KeyUnknown = glfw.KeyUnknown
