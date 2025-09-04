@@ -30,6 +30,25 @@ const (
 	MaxPlayerNo     = MaxSimul*2 + MaxAttachedChar
 )
 
+// SDL_GameController button constants used for automatic gamepad mapping.
+const (
+	SDL_CONTROLLER_BUTTON_A = iota
+	SDL_CONTROLLER_BUTTON_B
+	SDL_CONTROLLER_BUTTON_X
+	SDL_CONTROLLER_BUTTON_Y
+	SDL_CONTROLLER_BUTTON_BACK
+	SDL_CONTROLLER_BUTTON_GUIDE
+	SDL_CONTROLLER_BUTTON_START
+	SDL_CONTROLLER_BUTTON_LEFTSTICK
+	SDL_CONTROLLER_BUTTON_RIGHTSTICK
+	SDL_CONTROLLER_BUTTON_LEFTSHOULDER
+	SDL_CONTROLLER_BUTTON_RIGHTSHOULDER
+	SDL_CONTROLLER_BUTTON_DPAD_UP
+	SDL_CONTROLLER_BUTTON_DPAD_DOWN
+	SDL_CONTROLLER_BUTTON_DPAD_LEFT
+	SDL_CONTROLLER_BUTTON_DPAD_RIGHT
+)
+
 // sys
 // The only instance of a System struct.
 // Do not create more than 1.
@@ -315,6 +334,99 @@ func isRunningInsideAppBundle(exePath string) bool {
 	return runtime.GOOS == "darwin" && strings.Contains(exePath, ".app")
 }
 
+// remapPlayStation configures KeyConfig according to the standard PlayStation layout.
+// Mapping table:
+//
+//	Cross  -> kA (SDL_CONTROLLER_BUTTON_A)
+//	Circle -> kB (SDL_CONTROLLER_BUTTON_B)
+//	Square -> kC (SDL_CONTROLLER_BUTTON_X)
+//	Triangle -> kX (SDL_CONTROLLER_BUTTON_Y)
+//	L1 -> kY (SDL_CONTROLLER_BUTTON_LEFTSHOULDER)
+//	R1 -> kZ (SDL_CONTROLLER_BUTTON_RIGHTSHOULDER)
+//	Options -> kS (SDL_CONTROLLER_BUTTON_START)
+//	Share   -> kD (SDL_CONTROLLER_BUTTON_BACK)
+//	L3 -> kW (SDL_CONTROLLER_BUTTON_LEFTSTICK)
+//	R3 -> kM (SDL_CONTROLLER_BUTTON_RIGHTSTICK)
+func remapPlayStation(kc *KeyConfig) {
+	kc.dU = SDL_CONTROLLER_BUTTON_DPAD_UP
+	kc.dD = SDL_CONTROLLER_BUTTON_DPAD_DOWN
+	kc.dL = SDL_CONTROLLER_BUTTON_DPAD_LEFT
+	kc.dR = SDL_CONTROLLER_BUTTON_DPAD_RIGHT
+	kc.kA = SDL_CONTROLLER_BUTTON_A
+	kc.kB = SDL_CONTROLLER_BUTTON_B
+	kc.kC = SDL_CONTROLLER_BUTTON_X
+	kc.kX = SDL_CONTROLLER_BUTTON_Y
+	kc.kY = SDL_CONTROLLER_BUTTON_LEFTSHOULDER
+	kc.kZ = SDL_CONTROLLER_BUTTON_RIGHTSHOULDER
+	kc.kS = SDL_CONTROLLER_BUTTON_START
+	kc.kD = SDL_CONTROLLER_BUTTON_BACK
+	kc.kW = SDL_CONTROLLER_BUTTON_LEFTSTICK
+	kc.kM = SDL_CONTROLLER_BUTTON_RIGHTSTICK
+}
+
+// remapXbox configures KeyConfig for Xbox-compatible layouts (including XInput devices).
+// Mapping table:
+//
+//	A -> kA, B -> kB, X -> kC, Y -> kX
+//	LB -> kY, RB -> kZ, Start -> kS, Back -> kD
+//	L3 -> kW, R3 -> kM
+func remapXbox(kc *KeyConfig) {
+	kc.dU = SDL_CONTROLLER_BUTTON_DPAD_UP
+	kc.dD = SDL_CONTROLLER_BUTTON_DPAD_DOWN
+	kc.dL = SDL_CONTROLLER_BUTTON_DPAD_LEFT
+	kc.dR = SDL_CONTROLLER_BUTTON_DPAD_RIGHT
+	kc.kA = SDL_CONTROLLER_BUTTON_A
+	kc.kB = SDL_CONTROLLER_BUTTON_B
+	kc.kC = SDL_CONTROLLER_BUTTON_X
+	kc.kX = SDL_CONTROLLER_BUTTON_Y
+	kc.kY = SDL_CONTROLLER_BUTTON_LEFTSHOULDER
+	kc.kZ = SDL_CONTROLLER_BUTTON_RIGHTSHOULDER
+	kc.kS = SDL_CONTROLLER_BUTTON_START
+	kc.kD = SDL_CONTROLLER_BUTTON_BACK
+	kc.kW = SDL_CONTROLLER_BUTTON_LEFTSTICK
+	kc.kM = SDL_CONTROLLER_BUTTON_RIGHTSTICK
+}
+
+// remapNintendo configures KeyConfig for Nintendo-style controllers
+// where the physical A/B and X/Y buttons are swapped relative to Xbox.
+// Mapping table:
+//
+//	B -> kA, A -> kB, Y -> kC, X -> kX
+//	L  -> kY, R -> kZ, Plus -> kS, Minus -> kD
+//	L3 -> kW, R3 -> kM
+func remapNintendo(kc *KeyConfig) {
+	kc.dU = SDL_CONTROLLER_BUTTON_DPAD_UP
+	kc.dD = SDL_CONTROLLER_BUTTON_DPAD_DOWN
+	kc.dL = SDL_CONTROLLER_BUTTON_DPAD_LEFT
+	kc.dR = SDL_CONTROLLER_BUTTON_DPAD_RIGHT
+	kc.kA = SDL_CONTROLLER_BUTTON_B
+	kc.kB = SDL_CONTROLLER_BUTTON_A
+	kc.kC = SDL_CONTROLLER_BUTTON_Y
+	kc.kX = SDL_CONTROLLER_BUTTON_X
+	kc.kY = SDL_CONTROLLER_BUTTON_LEFTSHOULDER
+	kc.kZ = SDL_CONTROLLER_BUTTON_RIGHTSHOULDER
+	kc.kS = SDL_CONTROLLER_BUTTON_START
+	kc.kD = SDL_CONTROLLER_BUTTON_BACK
+	kc.kW = SDL_CONTROLLER_BUTTON_LEFTSTICK
+	kc.kM = SDL_CONTROLLER_BUTTON_RIGHTSTICK
+}
+
+// remapControllers updates joystick configurations depending on detected controller name.
+func (s *System) remapControllers() {
+	for i := 0; i < len(s.joystickConfig); i++ {
+		jc := &s.joystickConfig[i]
+		name := input.GetJoystickName(jc.Joy)
+		switch {
+		case strings.Contains(name, "PlayStation"):
+			remapPlayStation(jc)
+		case strings.Contains(name, "Xbox"), strings.Contains(name, "XInput"):
+			remapXbox(jc)
+		case strings.Contains(name, "Nintendo"), strings.Contains(name, "Switch"):
+			remapNintendo(jc)
+		}
+	}
+}
+
 // Initialize stuff, this is called after the config int at main.go
 func (s *System) init(w, h int32) *lua.LState {
 	s.setWindowSize(w, h)
@@ -349,6 +461,9 @@ func (s *System) init(w, h int32) *lua.LState {
 			}
 		}
 	}
+
+	// Apply controller specific button mappings based on detected names.
+	s.remapControllers()
 
 	// Loading of external shader data.
 	// We need to do this before the render initialization at "gfx.Init()"
