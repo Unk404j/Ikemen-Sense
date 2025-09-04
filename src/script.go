@@ -253,9 +253,10 @@ func systemScriptInit(l *lua.LState) {
 		return 1
 	})
 
-	// Lua: GamepadControllerName() -> string
+	// Lua: GamepadControllerName(id = 0) -> string
 	luaRegister(l, "GamepadControllerName", func(l *lua.LState) int {
-		l.Push(lua.LString(ControllerName()))
+		id := int(l.OptInt(1, 0))
+		l.Push(lua.LString(ControllerName(id)))
 		return 1
 	})
 

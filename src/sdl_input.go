@@ -6,6 +6,7 @@ package main
 /*
 #cgo LDFLAGS: -lSDL2
 #include <SDL2/SDL.h>
+#include <string.h>
 
 static SDL_GameController* gController = NULL;
 static SDL_Haptic*        gHaptic    = NULL;
@@ -42,10 +43,18 @@ void CloseGamepad() {
 
 int IsGamepadConnected() { return gController != NULL; }
 
-const char* ControllerName() {
-    if (!gController) return "";
-    const char* n = SDL_GameControllerName(gController);
-    return n ? n : "";
+static char nameBuf[128];
+const char* ControllerName(int id) {
+    SDL_GameController* c = SDL_GameControllerOpen(id);
+    if (!c) return "";
+    const char* n = SDL_GameControllerName(c);
+    nameBuf[0] = '\0';
+    if (n) {
+        strncpy(nameBuf, n, sizeof(nameBuf) - 1);
+        nameBuf[sizeof(nameBuf) - 1] = '\0';
+    }
+    SDL_GameControllerClose(c);
+    return nameBuf;
 }
 
 int HasRumble() {
@@ -104,5 +113,5 @@ func IsGamepadConnected() bool { return C.IsGamepadConnected() != 0 }
 // HasRumble reports rumble capability.
 func HasRumble() bool { return C.HasRumble() != 0 }
 
-// ControllerName returns SDL name.
-func ControllerName() string { return C.GoString(C.ControllerName()) }
+// ControllerName returns SDL name for joystick id.
+func ControllerName(id int) string { return C.GoString(C.ControllerName(C.int(id))) }
