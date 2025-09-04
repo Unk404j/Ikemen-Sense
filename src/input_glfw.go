@@ -26,8 +26,8 @@ func LoadGamepadMappings(path string) error {
 	if err != nil {
 		return err
 	}
-	if err := glfw.UpdateGamepadMappings(string(data)); err != nil {
-		return err
+	if ok := glfw.UpdateGamepadMappings(string(data)); !ok {
+		return fmt.Errorf("failed to update gamepad mappings")
 	}
 	if err := AddSDLGamepadMappingsFromFile(path); err != nil {
 		return err
